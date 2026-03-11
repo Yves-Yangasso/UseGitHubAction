@@ -1,46 +1,59 @@
+# Nom du workflow affiché dans l'onglet "Actions" de GitHub
 name: Deploy to GitHub Pages
 
+# Déclencheur : ce workflow s'exécute automatiquement à chaque push sur la branche main
 on:
   push:
     branches: [ main ]
 
+# Variables d'environnement globales réutilisables dans tout le workflow
 env:
-  NODE_VERSION: '20'
-  DEPLOY_ENV: 'production'
-  SITE_PATH: './'
+  NODE_VERSION: '20'       # Version de Node.js (utile si on ajoute une étape build)
+  DEPLOY_ENV: 'production' # Environnement cible du déploiement
+  SITE_PATH: './'          # Chemin du dossier à déployer (racine du projet)
 
+# Permissions accordées au token GitHub pour ce workflow
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: read  # Lecture du code source du dépôt
+  pages: write    # Écriture sur GitHub Pages (nécessaire pour déployer)
+  id-token: write # Génération d'un token OIDC pour l'authentification sécurisée
 
+# Empêche plusieurs déploiements de tourner en même temps sur le même groupe
 concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  group: "pages"          # Nom du groupe de concurrence (unique par environnement)
+  cancel-in-progress: false # Ne annule PAS le déploiement en cours si un nouveau push arrive
 
 jobs:
   deploy:
+    # Définit l'environnement GitHub lié à ce job (visible dans Settings > Environments)
     environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+      name: github-pages                              # Nom de l'environnement GitHub
+      url: ${{ steps.deployment.outputs.page_url }}  # URL du site déployé (affichée dans Actions)
+
+    runs-on: ubuntu-latest # Le job tourne sur une machine virtuelle Ubuntu récente
+
     steps:
+      # Étape 1 : Récupère le code source du dépôt dans la machine virtuelle
       - name: Checkout
         uses: actions/checkout@v4
 
+      # Étape 2 : Configure GitHub Pages et active le déploiement via GitHub Actions
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:
-          enablement: true  # ← Active Pages automatiquement
+          enablement: true  # Active automatiquement Pages sans passer par les Settings manuellement
 
+      # Étape 3 : Compresse et uploade les fichiers du site comme artifact GitHub
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ env.SITE_PATH }}
+          path: ${{ env.SITE_PATH }}  # Utilise la variable d'env définie plus haut (./)
 
+      # Étape 4 : Déploie l'artifact uploadé sur GitHub Pages
       - name: Deploy
-        id: deployment
+        id: deployment  # Identifiant de l'étape pour récupérer ses outputs (page_url)
         uses: actions/deploy-pages@v4
 
+      # Étape 5 : Affiche l'URL publique du site dans les logs du workflow
       - name: Print deployment URL
         run: echo "Deployed to ${{ steps.deployment.outputs.page_url }}"
