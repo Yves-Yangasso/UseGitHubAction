@@ -5,27 +5,40 @@ on:
     branches:
       - main
 
-# Required permissions for Pages deployment
+# Permissions nécessaires
 permissions:
   contents: read
   pages: write
   id-token: write
 
+# Empêche plusieurs déploiements simultanés
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
   deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Build (none)
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Build
         run: echo "No build step; deploying static files from repository root."
 
-      - name: Upload artifact for GitHub Pages
-        uses: actions/upload-pages-artifact@v2
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./
 
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
