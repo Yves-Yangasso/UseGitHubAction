@@ -23,7 +23,7 @@ jobs:
         run: echo "No build step; deploying static files from repository root."
 
       - name: Upload artifact for GitHub Pages
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v2
         with:
           path: ./
 
