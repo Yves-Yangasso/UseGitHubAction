@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Transformation Digitale — VotreEntreprise</title>
+	<meta name="description" content="Solutions de transformation digitale — stratégie, produit, et technologie.">
+	<link rel="stylesheet" href="styles.css">
+	<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+	<header class="site-header">
+		<div class="container header-inner">
+			<a class="logo" href="#">
+				<svg width="36" height="36" viewBox="0 0 24 24" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+					<defs>
+						<linearGradient id="g1" x1="0" x2="1">
+							<stop offset="0" stop-color="#0066ff"/>
+							<stop offset="1" stop-color="#00b59b"/>
+						</linearGradient>
+					</defs>
+					<rect width="24" height="24" rx="5" fill="url(#g1)" />
+					<path d="M6 15c1-2 4-3 6-3s5 1 6 3" stroke="#fff" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+				</svg>
+				<span class="brand">VotreEntreprise</span>
+			</a>
+			<button id="navToggle" class="nav-toggle" aria-label="Ouvrir le menu">☰</button>
+			<nav id="mainNav" class="main-nav">
+				<a href="#services">Services</a>
+				<a href="#about">À propos</a>
+				<a href="#contact">Contact</a>
+			</nav>
+		</div>
+	</header>
+
+	<main>
+		<section class="hero">
+			<div class="container hero-inner">
+				<div class="hero-copy">
+					<h1>Accélérez votre transformation digitale</h1>
+					<p>Conseil, design produit et ingénierie pour rendre votre organisation plus agile et numérique.</p>
+					<div class="hero-cta">
+						<a href="#contact" class="btn primary">Contactez-nous</a>
+						<a href="#services" class="btn ghost">Nos services</a>
+					</div>
+				</div>
+				<div class="hero-visual" aria-hidden="true">
+					<!-- simple decorative illustration -->
+					<svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+						<defs>
+							<linearGradient id="lg2" x1="0" x2="1">
+								<stop offset="0" stop-color="#0066ff" stop-opacity="0.9"/>
+								<stop offset="1" stop-color="#00b59b" stop-opacity="0.9"/>
+							</linearGradient>
+						</defs>
+						<rect x="0" y="0" width="600" height="400" rx="20" fill="rgba(255,255,255,0.03)" />
+						<circle cx="140" cy="120" r="80" fill="url(#lg2)" opacity="0.9" />
+						<rect x="320" y="60" width="180" height="120" rx="12" fill="#071026" stroke="rgba(255,255,255,0.04)"/>
+						<g fill="#fff" opacity="0.9">
+							<rect x="340" y="80" width="140" height="14" rx="6" />
+							<rect x="340" y="104" width="110" height="10" rx="5" />
+						</g>
+					</svg>
+				</div>
+			</div>
+		</section>
+
+		<section id="services" class="section container">
+			<h2>Nos services</h2>
+			<div class="cards">
+				<article class="card">
+					<h3>Stratégie Digitale</h3>
+					<p>Ateliers, feuille de route et alignement organisationnel pour prioriser les initiatives à impact.</p>
+				</article>
+				<article class="card">
+					<h3>Design & Produit</h3>
+					<p>Prototypage rapide, expérience utilisateur et conception centrée client pour valider les idées.</p>
+				</article>
+				<article class="card">
+					<h3>Ingénierie & Cloud</h3>
+					<p>Architecture cloud, plateformes et automatisation pour accélérer les livraisons fiables.</p>
+				</article>
+			</div>
+		</section>
+
+		<section id="about" class="section container about">
+			<h2>À propos</h2>
+			<p>Nous sommes une équipe d'experts en transformation digitale qui accompagne les entreprises de toutes tailles à imaginer, construire et opérer des produits numériques efficaces et évolutifs.</p>
+		</section>
+
+		<section id="contact" class="section container contact">
+			<h2>Contact</h2>
+			<p>Parlez-nous de votre projet — nous vous recontacterons sous 48h.</p>
+			<form id="contactForm" class="contact-form">
+				<label>
+					Nom
+					<input type="text" name="name" required>
+				</label>
+				<label>
+					Email
+					<input type="email" name="email" required>
+				</label>
+				<label>
+					Message
+					<textarea name="message" rows="5" required></textarea>
+				</label>
+				<div class="form-actions">
+					<button type="submit" class="btn primary">Envoyer</button>
+					<span id="formStatus" class="form-status" aria-live="polite"></span>
+				</div>
+			</form>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<div class="container footer-inner">
+			<p>© <span id="year"></span> VotreEntreprise — Transformation digitale</p>
+			<nav class="footer-nav">
+				<a href="#">Mentions légales</a>
+				<a href="#">Politique de confidentialité</a>
+			</nav>
+		</div>
+	</footer>
+
+	<script src="script.js" defer></script>
+</body>
+</html>
